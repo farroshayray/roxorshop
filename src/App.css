@@ -1,0 +1,16 @@
+.imgUpload {
+  background-image: url('https://thumbs.dreamstime.com/b/transparent-seamless-pattern-background-checkered-simulation-alpha-channel-png-wallpaper-empty-gird-grid-vector-illustration-308566526.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.button {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.next-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
