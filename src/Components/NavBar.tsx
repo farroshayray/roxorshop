@@ -52,7 +52,7 @@ const NavBar = () => {
                     {isLoggedIn ? (
                         <div className="shadow-xl w-64">
                             <div>
-                                <img src={avatar1 ?? ''} alt={initialName} className="rounded-full h-20 w-auto my-4 mx-auto bg-black p-2"/>
+                                <img src={avatar1 ?? ''} alt={initialName} className="rounded-full object-cover w-20 h-20 my-4 mx-auto bg-black p-2"/>
                                 <p className="text-black mr-6 my-auto font-bold mx-4 text-center">{fullName}</p>
                             </div>
                             <hr className="my-3 bg-black"/>
@@ -103,7 +103,7 @@ const NavBar = () => {
                     <div className="flex">
                         <p className="text-white mr-6 my-auto font-bold">{fullName}</p>
                         <button onClick={handleDropDown} className="bg-black rounded-full w-10 h-10 hover:bg-slate-300">
-                            <img src={avatar1 ?? ''} alt={initialName} className="rounded-full min-w-full min-h-full"/>
+                            <img src={avatar1 ?? ''} alt={initialName} className="rounded-full object-cover w-10 h-10"/>
                         </button>
                     </div>
                     {isOpened && (
