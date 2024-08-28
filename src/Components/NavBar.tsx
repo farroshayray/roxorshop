@@ -43,6 +43,7 @@ const NavBar = () => {
     const initialName = fullName?.charAt(0).toUpperCase();
 
     return (
+        <div className="h-32">
         <div className="navbar flex flex-col justify-between p-3 items-center bg-neutral-950 sm:flex-row">
             <div className="text-white absolute right-0 top-0 h-16 w-16 flex items-center justify-center sm:hidden">
             <Hamburger toggled={hamOpen} toggle={setHamOpen}/>
@@ -107,7 +108,7 @@ const NavBar = () => {
                         </button>
                     </div>
                     {isOpened && (
-                        <button onClick={handleLogout} className="bg-white absolute top-20 right-1 rounded-md">
+                        <button onClick={handleLogout} className="bg-white absolute top-20 right-1 rounded-md shadow-md hover:bg-slate-400">
                         <p className="m-2 font-semibold">Logout</p>
                         </button>
                 )}
@@ -123,6 +124,7 @@ const NavBar = () => {
                     </Link>
                 )}
             </div>
+        </div>
         </div>
     );
 };

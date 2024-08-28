@@ -35,17 +35,14 @@ const Categories: React.FC = () => {
 
   const fetchCategories = async (token: string) => {
     try {
-      const response = await axios.get("http://localhost:8080/categories", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get("https://api.escuelajs.co/api/v1/categories");
+      console.log(response);
       setCategories(response.data.slice(0, 10));
     } catch (error) {
       console.error("Error fetching categories:", error);
       if (error) {
         // Token might be invalid, navigate to login
-        navigate("/login");
+        // navigate("/login");
       }
     }
   };

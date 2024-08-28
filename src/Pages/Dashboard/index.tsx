@@ -1,32 +1,28 @@
-import React from 'react';
-import NavBar from "../../Components/NavBar";
-import FooterContainer from "../../Components/Footer/FooterContainer";
-import { Link } from 'react-router-dom';
-import CategoryView from '../../Components/CategoryView';
+import React, { useState } from 'react';
+import NavBar from '../../Components/NavBar';
+import DashboardNavBar from './DashboardNavBar';
+import ProductGrid from '../../Components/Products.tsx/ProductGrid';
+import FooterContainer from '../../Components/Footer/FooterContainer';
 
 const Dashboard = () => {
-  const fullName = localStorage.getItem("fullName");
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | undefined>(undefined);
+  const [checkImage, setCheckImage] = useState(true);
+
+  const handleCategorySelect = (categoryId?: number) => {
+    setSelectedCategoryId(categoryId);
+  };
+  const handleImageCheck = () => {
+    setCheckImage(!checkImage);
+  }
 
   return (
     <div>
-      <NavBar />
-      <div className="flex flex-col items-center justify-center py-7 bg-gray-100">
-        <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-md shadow-md">
-          <h2 className="text-2xl font-bold text-center">Welcome, {fullName}!</h2>
-          <p className="text-center">You have successfully logged in.</p>
-        </div>
-        <div>
-            <Link to="/categories">
-            <button className='mt-10 bg-gray-950 rounded-md hover:bg-slate-800'>
-                <p className='text-white p-2'>Get Started</p>
-            </button>
-            </Link>
-        </div>
-        {/* <CategoryView/> */}
-      </div>
-      <FooterContainer />
+        <NavBar />
+        <DashboardNavBar onCategorySelect={handleCategorySelect} onCheckImages={handleImageCheck} />
+        <ProductGrid categoryId={selectedCategoryId} checkImageEnabled={checkImage}/>
+        <FooterContainer />
     </div>
-  );
-};
+  )
+}
 
 export default Dashboard;

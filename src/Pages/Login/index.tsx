@@ -45,12 +45,12 @@ const Login = () => {
           localStorage.setItem('role', dataProfile.role);
           localStorage.setItem('creationAt', dataProfile.creationAt);
           localStorage.setItem('updatedAt', dataProfile.updatedAt);
-          console.log(dataProfile);
+          console.log(response);
       } catch (error) {
         console.log(error);
       }
       console.log(response);
-      navigate('/dashboard'); // Redirect to the Dashboard page
+      navigate('/welcome'); // Redirect to the Dashboard page
     } catch (error: any) {
       console.log(error.response.data.message);
       alert(error.response.data.message);
