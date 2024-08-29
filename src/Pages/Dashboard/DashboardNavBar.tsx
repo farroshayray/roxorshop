@@ -19,7 +19,7 @@ const DashboardNavBar: React.FC<DashboardNavBarProps> = ({ onCategorySelect, onC
     const [categories, setCategories] = useState<Category[]>([]);
     const [categoryBtn, setCategoryBtn] = useState(false);
     const [categoriesBtn, setCategoriesBtn] = useState<Category[]>([]);
-    const [checkedImages, setCheckedImages] = useState(false);
+    const [checkedImages, setCheckedImages] = useState(true);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -27,6 +27,7 @@ const DashboardNavBar: React.FC<DashboardNavBarProps> = ({ onCategorySelect, onC
                 const response = await axios.get('https://api.escuelajs.co/api/v1/categories');
                 setCategories(response.data.slice(0, 5));
                 setCategoriesBtn(response.data.slice(0, 9));
+                console.log(response.data)
             } catch (error) {
                 console.error("Error fetching categories:", error);
             }

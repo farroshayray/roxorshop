@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../picture/logo192.png"
 import { Squash as Hamburger } from 'hamburger-react';
+import CartLogo from "../picture/icons8-shopping-cart-48.png";
+import CartLogoBlack from "../picture/icons8-shopping-cart-48 (1).png";
 
 
 
@@ -53,7 +55,7 @@ const NavBar = () => {
                     {isLoggedIn ? (
                         <div className="shadow-xl w-64">
                             <div>
-                                <img src={avatar1 ?? ''} alt={initialName} className="rounded-full object-cover w-20 h-20 my-4 mx-auto bg-black p-2"/>
+                                <img src={avatar1 ?? ''} alt={initialName} className="rounded-full object-cover w-20 h-20 my-4 mx-auto bg-gray-100"/>
                                 <p className="text-black mr-6 my-auto font-bold mx-4 text-center">{fullName}</p>
                             </div>
                             <hr className="my-3 bg-black"/>
@@ -64,6 +66,13 @@ const NavBar = () => {
                                 <Link to="/product" className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white">Products</Link>
                             </div>
                             <hr className="mt-3 bg-black"/>
+                            <Link to="/cart" className="">
+                                <div className="text-center flex justify-center py-4 hover:bg-gray-800 hover:text-white">
+                                    <img src={CartLogoBlack} alt="Cart" className="w-5 h-fit mr-1 my-auto hover:bg-white" />
+                                    <p className="text-xl">Cart</p>
+                                </div>
+                            </Link> 
+                            <hr className="bg-black"/>
                             <div onClick={handleLogout}>
                                 <p className="text-center py-3  hover:bg-black hover:text-white text-xl">Logout</p>
                             </div>
@@ -98,6 +107,10 @@ const NavBar = () => {
                 <Link to="/about" className="mr-2 ml-2 text-white hover:text-orange-600">About Us</Link>
                 <Link to="/product" className="mr-2 ml-2 text-white hover:text-orange-600">Products</Link>
             </div>
+            <Link to="/cart" className="hover:scale-105 transition-transform hidden sm:flex">
+                <img src={CartLogo} alt="Cart" className="w-7 h-fit"/>
+                <p className="text-white hidden md:block">Shopping Cart</p>
+            </Link>
             <div className="hidden sm:flex">
                 {isLoggedIn ? (
                     <div className="flex-col flex">

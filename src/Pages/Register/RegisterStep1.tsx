@@ -4,6 +4,7 @@ import { FormikProps, Field, ErrorMessage } from "formik";
 import { FormValues } from "../../App";
 import NavBar from "../../Components/NavBar";
 import FooterContainer from "../../Components/Footer/FooterContainer";
+import { Link } from "react-router-dom";
 
 interface Step1Props {
   formik: FormikProps<FormValues>;
@@ -65,6 +66,10 @@ const RegisterStep1: React.FC<Step1Props> = ({ formik, onNext }) => {
         <button type="submit" className="mt-4 w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700" onClick={handleNext}>
           Next
         </button>
+        <div className="flex">
+          <p>Have an account yet?</p>
+          <Link to='/login'><p className="ml-2 underline hover:text-blue-600">login</p></Link>
+        </div>
       </form>
     </div>
     <FooterContainer />

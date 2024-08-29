@@ -7,7 +7,8 @@ import Categories from "./Pages/Categories/index";
 import NotFoundPage from "./Pages/NotFound";
 import RegisterPage from "./Pages/Register";
 import Dashboard from "./Pages/Dashboard";
-import ProductDetailPage from "./Components/Products.tsx/ProductDetailPage";// Import ProductDetailPage
+import ProductDetailPage from "./Pages/ProductDetailPage/ProductDetailPage";// Import ProductDetailPage
+import CartPage from "./Pages/ShoppingCart/CartPage";
 
 // Interface FormValues
 export interface FormValues {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/product/:id" element={<ProductDetailPage />} /> {/* Update route */}
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </Router>
     </div>

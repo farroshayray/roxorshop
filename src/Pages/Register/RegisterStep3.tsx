@@ -130,6 +130,10 @@ const RegisterStep3: React.FC<Step3Props> = ({ formik, onBack, onSubmit, onClick
           </Link>
           </div>
         )}
+        <div className="flex">
+          <p>Have an account yet?</p>
+          <Link to='/login'><p className="ml-2 underline hover:text-blue-600">login</p></Link>
+        </div>
       </form>
     </div>
     <FooterContainer />

@@ -4,6 +4,7 @@ import { FormValues } from "../../App";
 import NavBar from "../../Components/NavBar";
 import FooterContainer from "../../Components/Footer/FooterContainer";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 interface Step2Props {
   formik: FormikProps<FormValues>;
@@ -139,6 +140,10 @@ const RegisterStep2: React.FC<Step2Props> = ({ formik, onNext, onBack }) => {
             >
               Next
             </button>
+          </div>
+          <div className="flex">
+            <p>Have an account yet?</p>
+            <Link to='/login'><p className="ml-2 underline hover:text-blue-600">login</p></Link>
           </div>
         </form>
       </div>

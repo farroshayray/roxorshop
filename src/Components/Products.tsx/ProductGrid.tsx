@@ -13,19 +13,18 @@ interface Product {
     name: string;
     image: string;
   };
-  images: string[];
+  images: any; // Updated to 'any' to handle different types of data
 }
 
 interface ProductGridProps {
   categoryId?: number;
-  checkImageEnabled?: boolean; // Prop baru untuk menentukan apakah perlu memeriksa URL gambar
+  checkImageEnabled?: boolean;
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ categoryId, checkImageEnabled}) => {
+const ProductGrid: React.FC<ProductGridProps> = ({ categoryId, checkImageEnabled }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  // const [checkImageEnabled, setCheckImageEnabled] = useState(true);
 
   const navigate = useNavigate();
 
@@ -40,12 +39,16 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categoryId, checkImageEnabled
 
         const response = await axios.get<Product[]>(url);
 
+        const normalizedProducts = response.data.map((product) => {
+          const imageUrl = normalizeImages(product.images);
+          return { ...product, images: imageUrl };
+        });
+
         if (checkImageEnabled) {
-          // Filter products that have a valid image URL
           const filteredProducts = await Promise.all(
-            response.data.map(async (product) => {
-              if (product.images.length > 0 && product.images[0] !== '') {
-                const isImageValid = await checkImage(product.images[0]);
+            normalizedProducts.map(async (product) => {
+              if (product.images) {
+                const isImageValid = await checkImage(product.images);
                 return isImageValid ? product : null;
               }
               return null;
@@ -53,11 +56,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categoryId, checkImageEnabled
           );
 
           setProducts(filteredProducts.filter((product): product is Product => product !== null));
-          console.log(filteredProducts);
         } else {
-          
-          setProducts(response.data);
-          console.log(response.data)
+          setProducts(normalizedProducts);
         }
       } catch (error) {
         console.error('Error fetching the products:', error);
@@ -69,6 +69,25 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categoryId, checkImageEnabled
 
     fetchProducts();
   }, [categoryId, checkImageEnabled]);
+
+  const normalizeImages = (images: any): string => {
+    if (typeof images === 'string') {
+      try {
+        const parsed = JSON.parse(images);
+        if (Array.isArray(parsed)) {
+          return parsed[0]; // Return the first URL if it's an array
+        }
+        return images; // Return as is if it's not an array
+      } catch (e) {
+        return images;
+      }
+    }
+    if (Array.isArray(images)) {
+      const flattenedImages = images.flat(Infinity);
+      return flattenedImages.find((url) => typeof url === 'string') || '';
+    }
+    return '';
+  };
 
   const checkImage = (url: string): Promise<boolean> => {
     return new Promise((resolve) => {
@@ -99,22 +118,12 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categoryId, checkImageEnabled
     navigate(`/product/${productId}`);
   };
 
-  // const toggleImageCheck = () => {
-  //   setCheckImageEnabled(!checkImageEnabled);
-  // }
-
   return (
     <div>
-      {/* <div className="px-4 text-left flex">
-        <label htmlFor="toggle-check">
-            <input type="checkbox" id="toggle-check" checked={checkImageEnabled} onChange={toggleImageCheck} />
-        </label>
-        <p className='ml-2'>Secure Products</p>
-      </div> */}
       <div className="product-grid">
         {products.map((product) => (
           <div className="product-card cursor-pointer" key={product.id} onClick={() => handleClick(product.id)}>
-            <img src={product.images[0]} alt={product.title} className="product-image" />
+            <img src={product.images} alt={product.title} className="product-image" />
             <div className="product-info">
               <h2 className="product-title">{product.title}</h2>
               <p className="product-price">${product.price}</p>

@@ -18,7 +18,7 @@ interface CarouselProps {
   scrollTime: number;
   categoryId: string;
   deviceType?: string;
-  checkImages: boolean; // Prop baru untuk menentukan apakah perlu memeriksa URL gambar
+  checkImages: boolean;
 }
 
 const responsive = {
@@ -55,11 +55,16 @@ const CategoryCarousel: React.FC<CarouselProps> = ({ categoryId, scrollTime, dev
             response.data.map(async (product: Product) => {
               const validImages = await filterValidImages(product.images);
               if (validImages.length > 0) {
-                return { ...product, images: validImages };
+                return { ...product, images: [validImages[0]] };
               }
               return null;
             })
           );
+        } else {
+          validImageProducts = validImageProducts.map((product: Product) => {
+            const firstImage = product.images.length > 0 ? [product.images[0]] : [];
+            return { ...product, images: firstImage };
+          });
         }
 
         const filteredProducts = validImageProducts.filter((product: any) => product !== null);
@@ -95,16 +100,12 @@ const CategoryCarousel: React.FC<CarouselProps> = ({ categoryId, scrollTime, dev
     });
   };
 
-  const getRandomImage = (images: string[]) => {
-    return images[Math.floor(Math.random() * images.length)];
-  };
-
   const handleClick = (productId: number) => {
     navigate(`/product/${productId}`);
   };
 
   if (products.length === 0) {
-    return null;  // Tidak menampilkan apa pun jika tidak ada produk dengan gambar yang valid
+    return null;
   }
 
   return (
@@ -131,9 +132,9 @@ const CategoryCarousel: React.FC<CarouselProps> = ({ categoryId, scrollTime, dev
         itemClass="carousel-item-padding-40-px"
       >
         {products.map((product) => (
-          <div key={product.id} className="p-4 bg-white shadow-md rounded-lg cursor-pointer" onClick={() => handleClick(product.id)}>
+          <div key={product.id} className="p-4 bg-white shadow-md rounded-lg cursor-pointer hover:scale-105 transition-transform" onClick={() => handleClick(product.id)}>
             <img
-              src={getRandomImage(product.images)}
+              src={product.images[0]} // Use only the first image
               alt={product.title}
               className="w-full h-48 object-cover rounded-lg mb-4"
             />

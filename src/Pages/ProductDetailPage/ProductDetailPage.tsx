@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import NavBar from '../NavBar';
+import NavBar from '../../Components/NavBar';
+import BackBtnLogo from "../../picture/icons8-back-48.png";
 
 interface Product {
   id: number;
@@ -14,7 +15,7 @@ interface Product {
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0); // State untuk melacak gambar yang sedang ditampilkan
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,15 +47,25 @@ const ProductDetailPage: React.FC = () => {
     );
   };
 
-  const handleClick = () => {
-    navigate(`/product/${product.id}`);
+  const addToCart = () => {
+    const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+    const updatedCartItems = [...cartItems, product];
+    localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+    alert('Product added to cart!');
   };
+
+  const handleBack = () => {
+    navigate(-1);
+  }
 
   return (
     <div>
       <NavBar />
-      <div className=' flex justify-center'>
-        <div className="flex flex-col w-full mx-4 md:w-2/4 sm:w-2/3 my-10 shadow-xl rounded-2xl" style={{ cursor: 'pointer' }}>
+      <div className='mx-3' onClick={handleBack}>
+        <img src={BackBtnLogo} alt="Back" className='rounded-full hover:bg-slate-300' />
+      </div>
+      <div className='flex justify-center'>
+        <div className="flex flex-col w-full mx-4 md:w-2/4 sm:w-2/3 my-10 shadow-xl rounded-2xl">
           <div className='relative'>
             <img src={product.images[currentImageIndex]} alt={product.title} className="rounded-2xl object-cover mx-auto" />
             {product.images.length > 1 && (
@@ -73,6 +84,12 @@ const ProductDetailPage: React.FC = () => {
             <p className="text-xl mb-3">Price: ${product.price}</p>
             <p>Description:</p>
             <p className="mb-3">{product.description}</p>
+            <button 
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              onClick={addToCart}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>

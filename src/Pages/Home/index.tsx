@@ -38,11 +38,12 @@ const Home = () => {
       <CategoryCarousel categoryId="3" scrollTime={4200} checkImages={checkedImages}/>
       <CategoryCarousel categoryId="4" scrollTime={3200} checkImages={checkedImages}/>
       <CategoryCarousel categoryId="5" scrollTime={3500} checkImages={checkedImages}/>
+      <Promotion />
       <div className='my-20 text-center'>
         <h2 className='text-2xl'>Products For You</h2>
       </div>
       <ProductGrid checkImageEnabled={checkedImages}/>
-      <Promotion />
+      
       <FooterContainer />
     </div>
   )
