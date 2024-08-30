@@ -40,6 +40,33 @@ const NavBar = () => {
         // Redirect to the login page or home page after logout
         navigate('/login');
     };
+    const handleProductNavClick = () => {
+        navigate('/');
+        setTimeout(() => {
+            const gridElement = document.querySelector(".product-for-you");
+            if (gridElement) {
+              gridElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 200); // delay for 1 second
+        };
+        const handleProfileNavClick = () => {
+            navigate('/');
+            setTimeout(() => {
+                const gridElement = document.querySelector(".welcome-text");
+                if (gridElement) {
+                  gridElement.scrollIntoView({ behavior: "smooth" });
+                }
+              }, 200); // delay for 1 second
+            };
+        const handleAboutUstNavClick = () => {
+            navigate('/');
+            setTimeout(() => {
+                const gridElement = document.querySelector(".footer-container");
+                if (gridElement) {
+                    gridElement.scrollIntoView({ behavior: "smooth" });
+                }
+                }, 200); // delay for 1 second
+            };
     const avatar1 = localStorage.getItem('avatar');
     const fullName = localStorage.getItem("fullName");
     const initialName = fullName?.charAt(0).toUpperCase();
@@ -60,10 +87,10 @@ const NavBar = () => {
                             </div>
                             <hr className="my-3 bg-black"/>
                             <div className="flex flex-col text-center text-xl">
-                                <Link to="/" className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white">Home</Link>
-                                <Link to="/profile" className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white">Profile</Link>
-                                <Link to="/about" className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white">About Us</Link>
-                                <Link to="/product" className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white">Products</Link>
+                                <div className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white cursor-pointer" onClick={handleProfileNavClick}>Home</div>
+                                <div className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white cursor-pointer" onClick={handleProfileNavClick}>Profile</div>
+                                <div className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white cursor-pointer" onClick={handleAboutUstNavClick}>About Us</div>
+                                <div className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white cursor-pointer" onClick={handleProductNavClick} >Products</div>
                             </div>
                             <hr className="mt-3 bg-black"/>
                             <Link to="/cart" className="">
@@ -80,10 +107,10 @@ const NavBar = () => {
                     ):(
                         <div className="shadow-xl w-64">
                             <div className="flex flex-col text-center text-xl">
-                                <Link to="/" className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white">Home</Link>
-                                <Link to="/profile" className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white">Profile</Link>
-                                <Link to="/about" className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white">About Us</Link>
-                                <Link to="/product" className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white">Products</Link>
+                                <div className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white cursor-pointer" onClick={handleProfileNavClick}>Home</div>
+                                <div className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white cursor-pointer" onClick={handleProfileNavClick}>Profile</div>
+                                <div className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white cursor-pointer" onClick={handleAboutUstNavClick}>About Us</div>
+                                <div className="mr-2 ml-2 py-3 text-black hover:bg-black hover:text-white cursor-pointer" onClick={handleProductNavClick}>Products</div>
                             </div>
                             <hr className="mt-3 bg-black"/>
                             <Link to="/login">
@@ -101,11 +128,11 @@ const NavBar = () => {
                     <img src={Logo} alt="logo" className="app-logo mt-6 w-36 sm:m-0 sm:w-20"/>
                 </div>
             </Link>
-            <div className="my-10 sm:my-auto hidden sm:block">
-                <Link to="/" className="mr-2 ml-2 text-white hover:text-orange-600">Home</Link>
-                <Link to="/profile" className="mr-2 ml-2 text-white hover:text-orange-600">Profile</Link>
-                <Link to="/about" className="mr-2 ml-2 text-white hover:text-orange-600">About Us</Link>
-                <Link to="/product" className="mr-2 ml-2 text-white hover:text-orange-600">Products</Link>
+            <div className="my-10 sm:my-auto hidden sm:flex">
+                <div className="mr-2 ml-2 text-white hover:text-orange-600 cursor-pointer" onClick={handleProfileNavClick}>Home</div>
+                <div className="mr-2 ml-2 text-white hover:text-orange-600 cursor-pointer" onClick={handleProfileNavClick}>Profile</div>
+                <div className="mr-2 ml-2 text-white hover:text-orange-600 cursor-pointer" onClick={handleAboutUstNavClick}>About Us</div>
+                <div className="mr-2 ml-2 text-white hover:text-orange-600 cursor-pointer" onClick={handleProductNavClick}>Products</div>
             </div>
             <Link to="/cart" className="hover:scale-105 transition-transform hidden sm:flex">
                 <img src={CartLogo} alt="Cart" className="w-7 h-fit"/>

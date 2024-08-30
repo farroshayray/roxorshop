@@ -63,9 +63,15 @@ const CartPage: React.FC = () => {
   };
 
   if (cartItems.length === 0) {
+    const handleBack = () => {
+      navigate(-1);
+    }
     return (
       <div>
         <NavBar />
+        <button className='ml-3' onClick={handleBack}>
+          <img src={BackIcon} alt="Back" className='rounded-full hover:bg-slate-300' />
+        </button>
         <p className="text-center mt-10">Your cart is empty.</p>
       </div>
     );
@@ -77,7 +83,7 @@ const CartPage: React.FC = () => {
   return (
     <div>
       <NavBar />
-      <button className='' onClick={handleBack}>
+      <button className='ml-3' onClick={handleBack}>
         <img src={BackIcon} alt="Back" className='rounded-full hover:bg-slate-300' />
       </button>
       <div className="container mx-auto my-10">

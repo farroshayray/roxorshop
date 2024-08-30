@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from "../../Components/NavBar";
 import FooterContainer from "../../Components/Footer/FooterContainer";
 import { Link } from 'react-router-dom';
-import CategoryView from '../../Components/CategoryView';
 
 const WelcomeLogin = () => {
   const fullName = localStorage.getItem("fullName");
@@ -16,13 +15,12 @@ const WelcomeLogin = () => {
           <p className="text-center">You have successfully logged in.</p>
         </div>
         <div>
-            <Link to="/dashboard">
+            <Link to="/">
             <button className='mt-10 bg-gray-950 rounded-md hover:bg-slate-800'>
                 <p className='text-white p-2'>Get Started</p>
             </button>
             </Link>
         </div>
-        {/* <CategoryView/> */}
       </div>
       <FooterContainer />
     </div>

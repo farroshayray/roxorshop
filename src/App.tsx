@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/index";
 import Home from "./Pages/Home/index";
 import WelcomeLogin from "./Pages/WelcomeLogin";
-import Categories from "./Pages/Categories/index";
 import NotFoundPage from "./Pages/NotFound";
 import RegisterPage from "./Pages/Register";
-import Dashboard from "./Pages/Dashboard";
+import Dashboard from "./Pages/CategoryPage";
 import ProductDetailPage from "./Pages/ProductDetailPage/ProductDetailPage";// Import ProductDetailPage
 import CartPage from "./Pages/ShoppingCart/CartPage";
 
@@ -26,7 +25,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/categories" element={<Categories />} />
           <Route path="/welcome" element={<WelcomeLogin />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFoundPage />} />

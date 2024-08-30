@@ -33,7 +33,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categoryId, checkImageEnabled
       setLoading(true);
       setError(null);
       try {
-        const url = categoryId 
+        const url = (categoryId) 
           ? `https://api.escuelajs.co/api/v1/categories/${categoryId}/products`
           : 'https://api.escuelajs.co/api/v1/products';
 
@@ -119,7 +119,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ categoryId, checkImageEnabled
   };
 
   return (
-    <div>
+    <div className='gridElement'>
       <div className="product-grid">
         {products.map((product) => (
           <div className="product-card cursor-pointer" key={product.id} onClick={() => handleClick(product.id)}>

@@ -48,10 +48,16 @@ const ProductDetailPage: React.FC = () => {
   };
 
   const addToCart = () => {
-    const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
-    const updatedCartItems = [...cartItems, product];
-    localStorage.setItem('cart', JSON.stringify(updatedCartItems));
-    alert('Product added to cart!');
+    const token = localStorage.getItem('token');
+    if (token) {
+      const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+      const updatedCartItems = [...cartItems, product];
+      localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+      alert('Product added to cart!');
+    } else {
+      navigate('/login');
+    }
+    
   };
 
   const handleBack = () => {

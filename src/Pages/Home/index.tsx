@@ -40,7 +40,7 @@ const Home = () => {
       <CategoryCarousel categoryId="5" scrollTime={3500} checkImages={checkedImages}/>
       <Promotion />
       <div className='my-20 text-center'>
-        <h2 className='text-2xl'>Products For You</h2>
+        <h2 className='product-for-you text-2xl'>Products For You</h2>
       </div>
       <ProductGrid checkImageEnabled={checkedImages}/>
       
